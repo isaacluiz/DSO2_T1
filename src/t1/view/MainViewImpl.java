@@ -17,4 +17,10 @@ public class MainViewImpl<CONTROLLER extends Controller<Model, View>> implements
 		System.out.println(string);
 	}
 
+	@Override
+	public void createScreen() {
+		// TODO Auto-generated method stub
+
+	}
+
 }
