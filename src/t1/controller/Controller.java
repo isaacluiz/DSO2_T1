@@ -6,4 +6,6 @@ public interface Controller<MODEL, VIEW> {
 
 	void setModel(MODEL model);
 
+	void init();
+
 }

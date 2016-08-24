@@ -23,4 +23,9 @@ public class MainControllerImpl<MODEL extends Model, VIEW extends View> implemen
 		this.model = model;
 	}
 
+	@Override
+	public void init() {
+		this.view.showMessage("HELLO WORLD!");
+	}
+
 }

@@ -12,9 +12,10 @@ public class MainApp {
 	public static void main(String[] args) {
 		Model mainModel = new MainModelImpl();
 		Controller mainController = new MainControllerImpl<MainModelImpl, MainViewImpl>();
-		View mainView = new MainViewImpl(mainController);
+		View mainView = new MainViewImpl<>(mainController);
 		mainController.setModel(mainModel);
 		mainController.setView(mainView);
+		mainController.init();
 	}
 
 }
