@@ -25,7 +25,7 @@ public class MainControllerImpl<MODEL extends Model, VIEW extends View> implemen
 
 	@Override
 	public void init() {
-		this.view.showMessage("HELLO WORLD!");
+		this.view.createScreen();
 	}
 
 }
