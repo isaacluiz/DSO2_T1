@@ -76,11 +76,6 @@ public class MainViewImpl<CONTROLLER extends Controller<Model, View>> implements
 		lblLivrosEmprestados.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		this.frame.getContentPane().add(lblLivrosEmprestados);
 
-		// LoginPanel login = new LoginPanel();
-		// login.setLocationRelativeTo(null);
-		// login.setVisible(true);
-		// login.setLoginListener(this);
-
 		String[] columnNames = { "Título", "Autor", "Data Retirada", "Data Devolução", "Vencido" };
 
 		Object[][] data = {
