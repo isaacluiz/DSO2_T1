@@ -11,9 +11,9 @@ import javax.swing.JTextField;
 
 import t1.constants.ViewConstants;
 import t1.controller.Controller;
-import t1.controller.MainControllerImpl;
-import t1.model.MainModelImpl;
+import t1.controller.LoginControllerImpl;
 import t1.model.Model;
+import t1.view.dados.Dados;
 
 public class LoginViewImpl<CONTROLLER extends Controller<Model, View>> implements View<CONTROLLER> {
 
@@ -84,12 +84,13 @@ public class LoginViewImpl<CONTROLLER extends Controller<Model, View>> implement
 
 	private void onLoginClicked(String login, String senha) {
 		this.frame.dispose();
-		Model mainModel = new MainModelImpl();
-		Controller mainController = new MainControllerImpl<MainModelImpl, MainViewImpl>();
-		View mainView = new MainViewImpl<>(mainController);
-		mainController.setModel(mainModel);
-		mainController.setView(mainView);
-		mainController.init();
+		((LoginControllerImpl) this.controller).showMainView();
+	}
+
+	@Override
+	public void setDados(Dados dados) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -1,6 +1,8 @@
 package t1.controller;
 
+import t1.model.MainModelImpl;
 import t1.model.Model;
+import t1.view.MainViewImpl;
 import t1.view.View;
 
 public class LoginControllerImpl<MODEL extends Model, VIEW extends View> implements Controller<MODEL, VIEW> {
@@ -22,6 +24,15 @@ public class LoginControllerImpl<MODEL extends Model, VIEW extends View> impleme
 	@Override
 	public void setModel(MODEL model) {
 		this.model = model;
+	}
+
+	public void showMainView() {
+		Model mainModel = new MainModelImpl();
+		Controller mainController = new MainControllerImpl<MainModelImpl, MainViewImpl>();
+		View mainView = new MainViewImpl<>(mainController);
+		mainController.setModel(mainModel);
+		mainController.setView(mainView);
+		mainController.init();
 	}
 
 }
