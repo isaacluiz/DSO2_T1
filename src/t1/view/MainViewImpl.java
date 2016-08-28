@@ -15,11 +15,10 @@ import javax.swing.border.LineBorder;
 
 import t1.constants.ViewConstants;
 import t1.controller.Controller;
-import t1.listeners.LoginListener;
 import t1.model.Model;
 
 @SuppressWarnings("rawtypes")
-public class MainViewImpl<CONTROLLER extends Controller<Model, View>> implements View<CONTROLLER>, LoginListener {
+public class MainViewImpl<CONTROLLER extends Controller<Model, View>> implements View<CONTROLLER> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -94,9 +93,4 @@ public class MainViewImpl<CONTROLLER extends Controller<Model, View>> implements
 		this.frame.setLocationRelativeTo(null);
 	}
 
-	@Override
-	public boolean onLoginClicked(String login, String senha) {
-		// TODO Auto-generated method stub
-		return true;
-	}
 }
