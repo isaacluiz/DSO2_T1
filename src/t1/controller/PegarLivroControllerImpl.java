@@ -5,22 +5,23 @@ import t1.view.View;
 
 public class PegarLivroControllerImpl<MODEL extends Model, VIEW extends View> implements Controller<MODEL, VIEW> {
 
+	private VIEW view;
+
+	private MODEL model;
+
 	@Override
 	public void setView(VIEW view) {
-		// TODO Auto-generated method stub
-
+		this.view = view;
 	}
 
 	@Override
 	public void setModel(MODEL model) {
-		// TODO Auto-generated method stub
-
+		this.model = model;
 	}
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
-
+		this.view.createScreen();
 	}
 
 }
