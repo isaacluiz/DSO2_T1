@@ -1,11 +1,11 @@
 package t1.view.objects;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import t1.view.annotations.Coluna;
+import t1.view.dados.Dados;
 
-public class Livro {
+public class Livro implements Dados {
 
 	private Long ID;
 
@@ -17,12 +17,7 @@ public class Livro {
 
 	private Date dataDevolucao;
 
-	/**
-	 * Dias que o livro vence, depois de ter sido retirado, por padrão é 7;
-	 */
-	private Integer diasDeVencimento = 7;
-
-	private Boolean vencido = (this.dataRetirada == null) ? false : (this.verificaVencimento());
+	private Boolean vencido;
 
 	@Coluna(nome = "ID", posicao = 0)
 	public Long getID() {
@@ -47,10 +42,6 @@ public class Livro {
 	@Coluna(nome = "Data Devolução", posicao = 4)
 	public Date getDataDevolucao() {
 		return this.dataDevolucao;
-	}
-
-	public Integer getDiasDeVencimento() {
-		return this.diasDeVencimento;
 	}
 
 	@Coluna(nome = "Vencido", posicao = 5)
@@ -78,19 +69,7 @@ public class Livro {
 		this.dataDevolucao = dataDevolucao;
 	}
 
-	public void setDiasDeVencimento(Integer diasDeVencimento) {
-		this.diasDeVencimento = diasDeVencimento;
-	}
-
 	public void setVencido(Boolean vencido) {
 		this.vencido = vencido;
 	}
-
-	private boolean verificaVencimento() {
-		Calendar c = Calendar.getInstance();
-		c.setTime(this.dataRetirada);
-		c.add(Calendar.DATE, 1);
-		return (c.getTime().after(new Date()));
-	}
-
 }

@@ -1,6 +1,5 @@
 package t1.view;
 
-import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -14,6 +13,7 @@ import t1.controller.Controller;
 import t1.controller.LoginControllerImpl;
 import t1.model.Model;
 import t1.view.dados.Dados;
+import t1.view.objects.DadosLogin;
 
 public class LoginViewImpl<CONTROLLER extends Controller<Model, View>> implements View<CONTROLLER> {
 
@@ -32,7 +32,6 @@ public class LoginViewImpl<CONTROLLER extends Controller<Model, View>> implement
 	@Override
 	public void showMessage(String string) {
 		// TODO Auto-generated method stub
-
 	}
 
 	/**
@@ -75,7 +74,8 @@ public class LoginViewImpl<CONTROLLER extends Controller<Model, View>> implement
 		btnCancelar.addActionListener(event -> this.onCancelarClicked());
 
 		this.frame.setVisible(true);
-		this.frame.setSize(new Dimension(ViewConstants.LOGIN_WIDTH, ViewConstants.LOGIN_HEIGHT));
+		this.frame.setSize(ViewConstants.LOGIN_WIDTH, ViewConstants.LOGIN_HEIGHT);
+		this.frame.setLocationRelativeTo(null);
 	}
 
 	private void onCancelarClicked() {
@@ -91,6 +91,14 @@ public class LoginViewImpl<CONTROLLER extends Controller<Model, View>> implement
 	public void setDados(Dados dados) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Dados getDados() {
+		DadosLogin dados = new DadosLogin();
+		dados.setLogin(this.loginField.getText());
+		dados.setSenha(this.passwordField.getSelectedText());
+		return dados;
 	}
 
 }

@@ -10,4 +10,6 @@ public interface View<CONTROLlER> {
 
 	void setDados(Dados dados);
 
+	Dados getDados();
+
 }

@@ -8,16 +8,24 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import t1.controller.Controller;
+import t1.controller.PegarLivroControllerImpl;
 import t1.model.Model;
 import t1.view.dados.Dados;
+import t1.view.objects.Livro;
 
 public class PegarLivroViewImpl<CONTROLLER extends Controller<Model, View>> implements View<CONTROLLER> {
 
 	private JFrame frame;
 	private JTextField textField;
 
+	private JLabel lblTitulovalue, labelAutorValue;
+
+	private CONTROLLER controller;
+
+	private Livro livro;
+
 	public PegarLivroViewImpl(CONTROLLER pegarLivroController) {
-		// TODO Auto-generated constructor stub
+		this.controller = pegarLivroController;
 	}
 
 	@Override
@@ -42,7 +50,7 @@ public class PegarLivroViewImpl<CONTROLLER extends Controller<Model, View>> impl
 		this.frame.getContentPane().add(lblDigiteOCdigo);
 
 		this.textField = new JTextField();
-		this.textField.setBounds(10, 96, 250, 20);
+		this.textField.setBounds(10, 96, 204, 20);
 		this.frame.getContentPane().add(this.textField);
 		this.textField.setColumns(10);
 
@@ -51,18 +59,18 @@ public class PegarLivroViewImpl<CONTROLLER extends Controller<Model, View>> impl
 		lblTtulo.setBounds(10, 127, 123, 20);
 		this.frame.getContentPane().add(lblTtulo);
 
-		JLabel lblTitulovalue = new JLabel("");
-		lblTitulovalue.setBounds(10, 158, 46, 14);
-		this.frame.getContentPane().add(lblTitulovalue);
+		this.lblTitulovalue = new JLabel("");
+		this.lblTitulovalue.setBounds(10, 158, 287, 14);
+		this.frame.getContentPane().add(this.lblTitulovalue);
 
 		JLabel lblAutor = new JLabel("Autor");
 		lblAutor.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblAutor.setBounds(10, 183, 123, 20);
 		this.frame.getContentPane().add(lblAutor);
 
-		JLabel labelAutorValue = new JLabel("");
-		labelAutorValue.setBounds(10, 214, 46, 14);
-		this.frame.getContentPane().add(labelAutorValue);
+		this.labelAutorValue = new JLabel("");
+		this.labelAutorValue.setBounds(10, 214, 287, 14);
+		this.frame.getContentPane().add(this.labelAutorValue);
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(e -> this.frame.dispose());
@@ -70,8 +78,15 @@ public class PegarLivroViewImpl<CONTROLLER extends Controller<Model, View>> impl
 		this.frame.getContentPane().add(btnCancelar);
 
 		JButton btnOk = new JButton("OK");
+		btnOk.addActionListener(event -> ((PegarLivroControllerImpl) this.controller).pegarLivro(this.livro));
 		btnOk.setBounds(43, 273, 89, 23);
 		this.frame.getContentPane().add(btnOk);
+
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(
+				event -> ((PegarLivroControllerImpl) this.controller).buscarLivroPorId(this.textField.getText()));
+		btnBuscar.setBounds(224, 95, 73, 23);
+		this.frame.getContentPane().add(btnBuscar);
 
 		this.frame.setSize(324, 352);
 		this.frame.setLocationRelativeTo(null);
@@ -79,7 +94,14 @@ public class PegarLivroViewImpl<CONTROLLER extends Controller<Model, View>> impl
 
 	@Override
 	public void setDados(Dados dados) {
-		// TODO Auto-generated method stub
+		this.livro = (Livro) dados;
+		this.lblTitulovalue.setText(this.livro.getTituloLivro());
+		this.labelAutorValue.setText(this.livro.getNomeAutor());
+	}
 
+	@Override
+	public Dados getDados() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

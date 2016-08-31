@@ -80,6 +80,7 @@ public class MainViewImpl<CONTROLLER extends Controller<Model, View>> implements
 		mnOpes.add(mntmAjuda);
 
 		JMenuItem mntmSair = new JMenuItem("Sair");
+		mntmSair.addActionListener(event -> System.exit(0));
 		mnOpes.add(mntmSair);
 
 		JLabel lblLivrosEmprestados = new JLabel("Livros Emprestados:");
@@ -125,5 +126,11 @@ public class MainViewImpl<CONTROLLER extends Controller<Model, View>> implements
 		this.table.setModel(model);
 		this.livros = livrosAux;
 		this.table.repaint();
+	}
+
+	@Override
+	public Dados getDados() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
