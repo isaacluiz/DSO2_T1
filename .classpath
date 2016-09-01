@@ -3,6 +3,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
-	<classpathentry kind="lib" path="C:/Users/Isaac Luiz/Documents/GitHub/DSO2_T1/postgresql-9.4.1209.jre6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
