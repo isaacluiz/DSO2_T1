@@ -3,8 +3,8 @@ package t1.controller;
 import t1.model.Model;
 import t1.view.View;
 
-public class DevolverlivroControllerImpl <MODEL extends Model, VIEW extends View> implements Controller<MODEL, VIEW> {
-	
+public class DevolverLivroControllerImpl<MODEL extends Model, VIEW extends View> implements Controller<MODEL, VIEW> {
+
 	private VIEW view;
 
 	private MODEL model;
@@ -21,10 +21,7 @@ public class DevolverlivroControllerImpl <MODEL extends Model, VIEW extends View
 
 	@Override
 	public void init() {
-		
+		this.view.createScreen();
 	}
-	
-	
-
 
 }

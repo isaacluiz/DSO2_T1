@@ -68,6 +68,7 @@ public class MainViewImpl<CONTROLLER extends Controller<Model, View>> implements
 		mnAes.add(mntmPegarLivro);
 
 		JMenuItem mntmDevolverLivro = new JMenuItem("Devolver Livro");
+		mntmDevolverLivro.addActionListener(event -> ((MainControllerImpl) this.controller).showDevolverLivro());
 		mnAes.add(mntmDevolverLivro);
 
 		JMenu mnOpes = new JMenu("Op\u00E7\u00F5es");

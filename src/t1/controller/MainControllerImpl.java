@@ -3,8 +3,10 @@ package t1.controller;
 import java.util.Arrays;
 import java.util.Date;
 
+import t1.model.DevolverLivroModelImpl;
 import t1.model.Model;
 import t1.model.PegarLivroModelImpl;
+import t1.view.DevolverLivroViewImpl;
 import t1.view.PegarLivroViewImpl;
 import t1.view.View;
 import t1.view.dados.ListaLivrosEmprestados;
@@ -53,6 +55,15 @@ public class MainControllerImpl<MODEL extends Model, VIEW extends View> implemen
 		pegarLivroController.setModel(pegarLivroModel);
 		pegarLivroController.setView(pegarLivroView);
 		pegarLivroController.init();
+	}
+
+	public void showDevolverLivro() {
+		Model devolverLivroModel = new DevolverLivroModelImpl();
+		Controller devolverLivroController = new DevolverLivroControllerImpl<DevolverLivroModelImpl, DevolverLivroViewImpl>();
+		View devolverLivroView = new DevolverLivroViewImpl(devolverLivroController);
+		devolverLivroController.setModel(devolverLivroModel);
+		devolverLivroController.setView(devolverLivroView);
+		devolverLivroController.init();
 	}
 
 }
