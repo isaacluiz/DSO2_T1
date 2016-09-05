@@ -69,7 +69,8 @@ public class LoginViewImpl<CONTROLLER extends Controller<Model, View>> implement
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setBounds(225, 210, 89, 23);
 		this.frame.getContentPane().add(btnLogin);
-		btnLogin.addActionListener(event -> this.onLoginClicked(lblLogin.getText(), lblPassword.getText()));
+		btnLogin.addActionListener(
+				event -> this.onLoginClicked(this.loginField.getText(), this.passwordField.getText()));
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(68, 210, 89, 23);
@@ -90,9 +91,7 @@ public class LoginViewImpl<CONTROLLER extends Controller<Model, View>> implement
 			DadosLogin dadosLogin = CSVReader.loadDadosLogin(login);
 			System.out.println(dadosLogin.getSenha());
 		} catch (UserNotFoundException | IOException e) {
-			if (e instanceof UserNotFoundException) {
-				JOptionPane.showMessageDialog(null, e.getMessage());
-			}
+			JOptionPane.showMessageDialog(null, e.getMessage());
 			e.printStackTrace();
 		}
 

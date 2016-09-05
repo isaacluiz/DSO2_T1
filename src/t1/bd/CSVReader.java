@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 import t1.exceptions.UserNotFoundException;
 import t1.view.objects.DadosLogin;
@@ -20,10 +21,11 @@ public class CSVReader {
 			throws UserNotFoundException, FileNotFoundException, IOException {
 		BufferedReader br = load(livros);
 
-		String lineDados = br.lines().filter(l -> !l.startsWith(comment) && l.startsWith(login + cvsSplitBy)).findAny()
-				.get();
-
-		if (lineDados == null) {
+		String lineDados = null;
+		try {
+			lineDados = br.lines().filter(l -> !l.startsWith(comment) && l.startsWith(login + cvsSplitBy)).findAny()
+					.get();
+		} catch (NoSuchElementException e) {
 			throw new UserNotFoundException();
 		}
 
