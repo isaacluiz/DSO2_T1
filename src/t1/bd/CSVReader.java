@@ -4,43 +4,31 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Optional;
+
+import t1.exceptions.UserNotFoundException;
+import t1.view.objects.DadosLogin;
 
 public class CSVReader {
-	
-	public static void main(String[] args) {
 
-        String livros = "/GitHub/DSO2_T1/livros.csv";
-        String logins = "/GitHub/DSO2_T1/logins.csv";
-        String emprestimos = "/GitHub/DSO2_T1/emprestimos.csv";
-        BufferedReader br = null;
-        String line = "";
-        String cvsSplitBy = ",";
+	private static final String livros = "/GitHub/DSO2_T1/livros.csv";
+	private static final String logins = "/GitHub/DSO2_T1/logins.csv";
+	private static final String emprestimos = "/GitHub/DSO2_T1/emprestimos.csv";
+	private static final String cvsSplitBy = ",";
+	private static final String comment = "#";
 
-        try {
+	public static DadosLogin checkDadosLogin(String login)
+			throws UserNotFoundException, FileNotFoundException, IOException {
+		BufferedReader br = load(livros);
 
-            br = new BufferedReader(new FileReader(livros));
-            while ((line = br.readLine()) != null) {
-            	
-                String[] country = line.split(cvsSplitBy);
+		String lineDados = br.lines().filter(l -> !l.startsWith(comment) && l.startsWith(login+cvsSplitBy)).findFirst().get();
 
-                System.out.println("Country [code= " + country[4] + " , name=" + country[5] + "]");
+		return null;
+	}
+s
+	private static BufferedReader load(String path) throws FileNotFoundException, IOException {
 
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-    }
+		return new BufferedReader(new FileReader(path));
+	}
 
 }

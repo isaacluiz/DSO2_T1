@@ -8,6 +8,11 @@ public class DadosLogin implements Dados {
 
 	private String senha;
 
+	public DadosLogin(String login, String senha) {
+		this.login = login;
+		this.senha = senha;
+	}
+
 	public String getLogin() {
 		return this.login;
 	}
