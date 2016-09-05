@@ -1,16 +1,19 @@
 package t1.view;
 
 import java.awt.Font;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import t1.bd.CSVReader;
 import t1.constants.ViewConstants;
 import t1.controller.Controller;
-import t1.controller.LoginControllerImpl;
+import t1.exceptions.UserNotFoundException;
 import t1.model.Model;
 import t1.view.dados.Dados;
 import t1.view.objects.DadosLogin;
@@ -83,8 +86,20 @@ public class LoginViewImpl<CONTROLLER extends Controller<Model, View>> implement
 	}
 
 	private void onLoginClicked(String login, String senha) {
-		this.frame.dispose();
-		((LoginControllerImpl) this.controller).showMainView();
+		try {
+			DadosLogin dadosLogin = CSVReader.loadDadosLogin(login);
+			System.out.println(dadosLogin.getSenha());
+		} catch (UserNotFoundException | IOException e) {
+			if (e instanceof UserNotFoundException) {
+				JOptionPane.showMessageDialog(null, e.getMessage());
+			}
+			e.printStackTrace();
+		}
+
+		/*
+		 * this.frame.dispose(); ((LoginControllerImpl)
+		 * this.controller).showMainView();
+		 */
 	}
 
 	@Override

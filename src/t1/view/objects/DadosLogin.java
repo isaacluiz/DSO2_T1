@@ -13,6 +13,9 @@ public class DadosLogin implements Dados {
 		this.senha = senha;
 	}
 
+	public DadosLogin() {
+	}
+
 	public String getLogin() {
 		return this.login;
 	}
