@@ -9,17 +9,18 @@ public class CSVReader {
 	
 	public static void main(String[] args) {
 
-        String csvFile = "caminho do arquivo CSV";
+        String livros = "/GitHub/DSO2_T1/livros.csv";
+        String logins = "/GitHub/DSO2_T1/logins.csv";
+        String emprestimos = "/GitHub/DSO2_T1/emprestimos.csv";
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
 
         try {
 
-            br = new BufferedReader(new FileReader(csvFile));
+            br = new BufferedReader(new FileReader(livros));
             while ((line = br.readLine()) != null) {
-
-                // use comma as separator
+            	
                 String[] country = line.split(cvsSplitBy);
 
                 System.out.println("Country [code= " + country[4] + " , name=" + country[5] + "]");

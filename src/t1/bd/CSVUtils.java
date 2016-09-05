@@ -16,7 +16,6 @@ public class CSVUtils {
         writeLine(w, values, separadores, ' ');
     }
 
-    //https://tools.ietf.org/html/rfc4180
     private static String followCVSformat(String value) {
 
         String result = value;
@@ -30,8 +29,6 @@ public class CSVUtils {
     public static void writeLine(Writer w, List<String> values, char separadores, char customQuote) throws IOException {
 
         boolean first = true;
-
-        //default customQuote is empty
 
         if (separadores == ' ') {
             separadores = SEPARADOR;
