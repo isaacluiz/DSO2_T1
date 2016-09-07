@@ -2,9 +2,8 @@ package t1.view;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,6 +20,7 @@ import t1.controller.MainControllerImpl;
 import t1.model.Model;
 import t1.view.dados.Dados;
 import t1.view.dados.ListaLivrosEmprestados;
+import t1.view.objects.DadosLogin;
 import t1.view.objects.Livro;
 import t1.view.objects.LivroTableModel;
 
@@ -35,7 +35,9 @@ public class MainViewImpl<CONTROLLER extends Controller<Model, View>> implements
 
 	private JTable table;
 
-	private List<Livro> livros;
+	private Map<String, List<Livro>> livros;
+
+	private DadosLogin dadosLogin;
 
 	public MainViewImpl(CONTROLLER controller) {
 		this.controller = controller;
@@ -104,30 +106,36 @@ public class MainViewImpl<CONTROLLER extends Controller<Model, View>> implements
 
 	@Override
 	public void setDados(Dados dados) {
+		if (dados instanceof DadosLogin) {
+			this.dadosLogin = (DadosLogin) dados;
+		}
+
 		if (dados instanceof ListaLivrosEmprestados) {
 			this.livros = ((ListaLivrosEmprestados) dados).getLivrosEmprestados();
-			LivroTableModel model = new LivroTableModel(this.livros);
+			List<Livro> livrosTableModel = this.livros.get(this.dadosLogin.getLogin());
+
+			LivroTableModel model = new LivroTableModel(livrosTableModel);
 			this.table.setModel(model);
+			this.table.repaint();
 		}
-		this.teste();
 	}
 
-	private void teste() {
-		Livro livro = new Livro();
-		livro.setID(1L);
-		livro.setTituloLivro("Programação Orientada a Objetos");
-		livro.setNomeAutor("John Smith");
-		livro.setDataRetirada(new Date());
-
-		List<Livro> livrosAux = new ArrayList<>();
-		livrosAux.addAll(this.livros);
-		livrosAux.add(livro);
-
-		LivroTableModel model = new LivroTableModel(livrosAux);
-		this.table.setModel(model);
-		this.livros = livrosAux;
-		this.table.repaint();
-	}
+	// private void teste() {
+	// Livro livro = new Livro();
+	// livro.setID(1L);
+	// livro.setTituloLivro("Programação Orientada a Objetos");
+	// livro.setNomeAutor("John Smith");
+	// livro.setDataRetirada(new Date());
+	//
+	// List<Livro> livrosAux = new ArrayList<>();
+	// livrosAux.addAll(this.livros);
+	// livrosAux.add(livro);
+	//
+	// LivroTableModel model = new LivroTableModel(livrosAux);
+	// this.table.setModel(model);
+	// this.livros = livrosAux;
+	// this.table.repaint();
+	// }
 
 	@Override
 	public Dados getDados() {

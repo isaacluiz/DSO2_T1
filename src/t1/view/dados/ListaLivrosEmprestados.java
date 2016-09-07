@@ -1,23 +1,32 @@
 package t1.view.dados;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import t1.view.objects.Livro;
 
 public class ListaLivrosEmprestados implements Dados {
 
-	private List<Livro> livrosEmprestados;
+	private Map<String, List<Livro>> livrosEmprestados;
 
-	public List<Livro> getLivrosEmprestados() {
-		return this.livrosEmprestados;
-	}
-
-	public void setLivrosEmprestados(List<Livro> livrosEmprestados) {
+	public ListaLivrosEmprestados(Map<String, List<Livro>> livrosEmprestados) {
 		this.livrosEmprestados = livrosEmprestados;
 	}
 
-	public void addLivros(List<Livro> livros) {
-		this.livrosEmprestados.addAll(livros);
+	public Map<String, List<Livro>> getLivrosEmprestados() {
+		return this.livrosEmprestados;
+	}
+
+	public void setLivrosEmprestados(Map<String, List<Livro>> livrosEmprestados) {
+		this.livrosEmprestados = livrosEmprestados;
+	}
+
+	public void addLivros(String user, List<Livro> livros) {
+		if (this.livrosEmprestados.get(user) == null) {
+			this.livrosEmprestados.put(user, new ArrayList<Livro>());
+		}
+		this.livrosEmprestados.get(user).addAll(livros);
 	}
 
 }

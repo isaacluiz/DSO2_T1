@@ -1,16 +1,16 @@
 package t1.controller;
 
-import java.util.Arrays;
-import java.util.Date;
+import java.io.IOException;
 
+import t1.bd.CSVReader;
+import t1.exceptions.UserNotFoundException;
 import t1.model.DevolverLivroModelImpl;
+import t1.model.MainModelImpl;
 import t1.model.Model;
 import t1.model.PegarLivroModelImpl;
 import t1.view.DevolverLivroViewImpl;
 import t1.view.PegarLivroViewImpl;
 import t1.view.View;
-import t1.view.dados.ListaLivrosEmprestados;
-import t1.view.objects.Livro;
 
 public class MainControllerImpl<MODEL extends Model, VIEW extends View> implements Controller<MODEL, VIEW> {
 
@@ -34,18 +34,17 @@ public class MainControllerImpl<MODEL extends Model, VIEW extends View> implemen
 
 	@Override
 	public void init() {
+		this.view.setDados(((MainModelImpl) this.model).getDadosLogin());
 		this.view.createScreen();
-		ListaLivrosEmprestados livros = new ListaLivrosEmprestados();
+		try {
+			((MainModelImpl) this.model).setLivros(
+					CSVReader.loadAllLivrosByUserId(((MainModelImpl) this.model).getDadosLogin().getLogin()));
+		} catch (UserNotFoundException | IOException e) {
+			this.view.showMessage(e.getMessage());
+			e.printStackTrace();
+		}
 
-		Livro livro = new Livro();
-		livro.setID(1L);
-		livro.setTituloLivro("Programação Orientada a Objetos");
-		livro.setNomeAutor("John Smith");
-		livro.setDataRetirada(new Date());
-
-		livros.setLivrosEmprestados(Arrays.asList(livro, livro, livro));
-
-		this.view.setDados(livros);
+		this.view.setDados(((MainModelImpl) this.model).getLivros());
 	}
 
 	public void showPegarLivro() {

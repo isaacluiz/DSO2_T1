@@ -1,19 +1,16 @@
 package t1.view;
 
 import java.awt.Font;
-import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import t1.bd.CSVReader;
 import t1.constants.ViewConstants;
 import t1.controller.Controller;
-import t1.exceptions.UserNotFoundException;
+import t1.controller.LoginControllerImpl;
 import t1.model.Model;
 import t1.view.dados.Dados;
 import t1.view.objects.DadosLogin;
@@ -30,11 +27,6 @@ public class LoginViewImpl<CONTROLLER extends Controller<Model, View>> implement
 
 	public LoginViewImpl(CONTROLLER loginController) {
 		this.controller = loginController;
-	}
-
-	@Override
-	public void showMessage(String string) {
-		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -87,24 +79,14 @@ public class LoginViewImpl<CONTROLLER extends Controller<Model, View>> implement
 	}
 
 	private void onLoginClicked(String login, String senha) {
-		try {
-			DadosLogin dadosLogin = CSVReader.loadDadosLogin(login);
-			System.out.println(dadosLogin.getSenha());
-		} catch (UserNotFoundException | IOException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
-			e.printStackTrace();
+		if (((LoginControllerImpl) this.controller).onLoginClicked(login, senha)) {
+			this.frame.dispose();
+			((LoginControllerImpl) this.controller).showMainView();
 		}
-
-		/*
-		 * this.frame.dispose(); ((LoginControllerImpl)
-		 * this.controller).showMainView();
-		 */
 	}
 
 	@Override
 	public void setDados(Dados dados) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
