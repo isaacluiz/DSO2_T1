@@ -28,12 +28,6 @@ public class PegarLivroViewImpl<CONTROLLER extends Controller<Model, View>> impl
 		this.controller = pegarLivroController;
 	}
 
-	@Override
-	public void showMessage(String string) {
-		// TODO Auto-generated method stub
-
-	}
-
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -41,7 +35,7 @@ public class PegarLivroViewImpl<CONTROLLER extends Controller<Model, View>> impl
 	public void createScreen() {
 		this.frame = new JFrame("titulo");
 		this.frame.setVisible(true);
-		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.frame.getContentPane().setLayout(null);
 
 		JLabel lblDigiteOCdigo = new JLabel("Digite o c\u00F3digo do Livro");
@@ -78,7 +72,10 @@ public class PegarLivroViewImpl<CONTROLLER extends Controller<Model, View>> impl
 		this.frame.getContentPane().add(btnCancelar);
 
 		JButton btnOk = new JButton("OK");
-		btnOk.addActionListener(event -> ((PegarLivroControllerImpl) this.controller).pegarLivro(this.livro));
+		btnOk.addActionListener(event -> {
+			((PegarLivroControllerImpl) this.controller).pegarLivro();
+			this.frame.dispose();
+		});
 		btnOk.setBounds(43, 273, 89, 23);
 		this.frame.getContentPane().add(btnOk);
 
@@ -101,7 +98,6 @@ public class PegarLivroViewImpl<CONTROLLER extends Controller<Model, View>> impl
 
 	@Override
 	public Dados getDados() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.livro;
 	}
 }

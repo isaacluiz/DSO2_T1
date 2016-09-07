@@ -43,11 +43,6 @@ public class MainViewImpl<CONTROLLER extends Controller<Model, View>> implements
 		this.controller = controller;
 	}
 
-	@Override
-	public void showMessage(String string) {
-		System.out.println(string);
-	}
-
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -120,26 +115,8 @@ public class MainViewImpl<CONTROLLER extends Controller<Model, View>> implements
 		}
 	}
 
-	// private void teste() {
-	// Livro livro = new Livro();
-	// livro.setID(1L);
-	// livro.setTituloLivro("Programação Orientada a Objetos");
-	// livro.setNomeAutor("John Smith");
-	// livro.setDataRetirada(new Date());
-	//
-	// List<Livro> livrosAux = new ArrayList<>();
-	// livrosAux.addAll(this.livros);
-	// livrosAux.add(livro);
-	//
-	// LivroTableModel model = new LivroTableModel(livrosAux);
-	// this.table.setModel(model);
-	// this.livros = livrosAux;
-	// this.table.repaint();
-	// }
-
 	@Override
 	public Dados getDados() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ListaLivrosEmprestados(this.livros);
 	}
 }

@@ -1,39 +1,32 @@
 package t1.view;
 
 import java.awt.Font;
-import java.awt.SystemColor;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
-import javax.swing.border.EmptyBorder;
 
 import t1.controller.Controller;
+import t1.controller.DevolverLivroControllerImpl;
 import t1.model.Model;
 import t1.view.dados.Dados;
+import t1.view.objects.Livro;
 
 public class DevolverLivroViewImpl<CONTROLLER extends Controller<Model, View>> implements View<CONTROLLER> {
 
-	private JPanel contentPane;
-	private JTextField codigo;
-	private JTextField emprestimo;
-	private JTextField expiracao;
+	private JTextField textField;
+
+	private JLabel lblTitulovalue, labelAutorValue;
 
 	private JFrame frame;
 
 	private CONTROLLER controller;
 
+	private Livro livro;
+
 	public DevolverLivroViewImpl(CONTROLLER devolverLivroController) {
 		this.controller = devolverLivroController;
-	}
-
-	@Override
-	public void showMessage(String string) {
-		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -41,78 +34,72 @@ public class DevolverLivroViewImpl<CONTROLLER extends Controller<Model, View>> i
 	 */
 	@Override
 	public void createScreen() {
-		this.frame = new JFrame();
-		this.frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		this.contentPane = new JPanel();
-		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		this.frame.setContentPane(this.contentPane);
-		this.contentPane.setLayout(null);
+		this.frame = new JFrame("titulo");
+		this.frame.setVisible(true);
+		this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.frame.getContentPane().setLayout(null);
 
-		JLabel digite_o_codigo = new JLabel("Digite o c\u00F3digo do livro");
-		digite_o_codigo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		digite_o_codigo.setBounds(10, 26, 247, 40);
-		this.contentPane.add(digite_o_codigo);
+		JLabel lblDigiteOCdigo = new JLabel("Digite o c\u00F3digo do Livro");
+		lblDigiteOCdigo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblDigiteOCdigo.setBounds(10, 26, 364, 59);
+		this.frame.getContentPane().add(lblDigiteOCdigo);
 
-		this.codigo = new JTextField();
-		this.codigo.setBounds(10, 96, 202, 20);
-		this.contentPane.add(this.codigo);
-		this.codigo.setColumns(10);
+		this.textField = new JTextField();
+		this.textField.setBounds(10, 96, 204, 20);
+		this.frame.getContentPane().add(this.textField);
+		this.textField.setColumns(10);
 
-		JButton btnNewButton = new JButton("Buscar");
-		btnNewButton.setBounds(218, 95, 79, 23);
-		this.contentPane.add(btnNewButton);
+		JLabel lblTtulo = new JLabel("T\u00EDtulo");
+		lblTtulo.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblTtulo.setBounds(10, 127, 123, 20);
+		this.frame.getContentPane().add(lblTtulo);
 
-		JLabel label_expiracao = new JLabel("Data de expira\u00E7\u00E3o do empr\u00EAstimo");
-		label_expiracao.setFont(new Font("Tahoma", Font.BOLD, 13));
-		label_expiracao.setBounds(10, 185, 224, 14);
-		this.contentPane.add(label_expiracao);
+		this.lblTitulovalue = new JLabel("");
+		this.lblTitulovalue.setBounds(10, 158, 287, 14);
+		this.frame.getContentPane().add(this.lblTitulovalue);
 
-		JLabel label_data = new JLabel("Data de emprestimo");
-		label_data.setFont(new Font("Tahoma", Font.BOLD, 13));
-		label_data.setBounds(10, 129, 138, 14);
-		this.contentPane.add(label_data);
+		JLabel lblAutor = new JLabel("Autor");
+		lblAutor.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblAutor.setBounds(10, 183, 123, 20);
+		this.frame.getContentPane().add(lblAutor);
 
-		this.emprestimo = new JTextField();
-		this.emprestimo.setForeground(UIManager.getColor("Button.light"));
-		this.emprestimo.setEditable(false);
-		this.emprestimo.setEnabled(false);
-		this.emprestimo.setBounds(10, 154, 287, 20);
-		this.contentPane.add(this.emprestimo);
-		this.emprestimo.setColumns(10);
+		this.labelAutorValue = new JLabel("");
+		this.labelAutorValue.setBounds(10, 214, 287, 14);
+		this.frame.getContentPane().add(this.labelAutorValue);
 
-		this.expiracao = new JTextField();
-		this.expiracao.setForeground(SystemColor.controlHighlight);
-		this.expiracao.setEnabled(false);
-		this.expiracao.setEditable(false);
-		this.expiracao.setColumns(10);
-		this.expiracao.setBounds(10, 210, 287, 20);
-		this.contentPane.add(this.expiracao);
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(e -> this.frame.dispose());
+		btnCancelar.setBounds(175, 273, 89, 23);
+		this.frame.getContentPane().add(btnCancelar);
 
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(arg0 -> {
+			((DevolverLivroControllerImpl) this.controller).devolverLivro();
+			this.frame.dispose();
 		});
 		btnOk.setBounds(40, 265, 89, 23);
-		this.contentPane.add(btnOk);
+		this.frame.getContentPane().add(btnOk);
 
-		JButton cancelar = new JButton("Cancelar");
-		cancelar.addActionListener(e -> {
-		});
-		cancelar.setBounds(180, 265, 89, 23);
-		this.contentPane.add(cancelar);
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(
+				event -> ((DevolverLivroControllerImpl) this.controller).buscarLivroPorId(this.textField.getText()));
+		btnBuscar.setBounds(224, 95, 73, 23);
+		this.frame.getContentPane().add(btnBuscar);
 
 		this.frame.setVisible(true);
 		this.frame.setBounds(100, 100, 326, 354);
+		this.frame.setLocationRelativeTo(null);
 	}
 
 	@Override
 	public void setDados(Dados dados) {
-		// TODO Auto-generated method stub
-
+		this.livro = (Livro) dados;
+		this.lblTitulovalue.setText(this.livro.getTituloLivro());
+		this.labelAutorValue.setText(this.livro.getNomeAutor());
 	}
 
 	@Override
 	public Dados getDados() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.livro;
 	}
 }
